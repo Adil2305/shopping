@@ -1,0 +1,42 @@
+<section class="py-4">
+  <div class="container">
+    <h2 class="text-success fw-bold mb-4">Our Products</h2>
+    <div class="row g-4">
+      {{#each products}}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card border-success shadow-sm rounded-4 overflow-hidden h-100">
+            
+            <!-- FIXED IMAGE: Fills width & height properly -->
+            <div class="product-image-wrapper" style="height: 250px; overflow: hidden;">
+              <img src="/product-images/{{this._id}}.jpg"
+                   class="w-100 h-100"
+                   style="object-fit: cover;"
+                   alt="{{name}}" />
+            </div>
+
+            <div class="card-body d-flex flex-column">
+              <h6 class="card-title text-success fw-bold">{{name}}</h6>
+              <p class="card-text text-muted small">{{description}}</p>
+              <p class="fw-bold">₹{{price}}</p>
+              <button class="btn btn-success mt-auto" onclick="addToCart('{{this._id}}')">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+
+<style>
+
+  body {
+    background-color: #f0fff4;
+  }
+  .card-img-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+</style>

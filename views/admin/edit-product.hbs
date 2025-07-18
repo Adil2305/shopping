@@ -1,0 +1,89 @@
+<section>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Edit product </h2>
+        <form
+          action="/admin/edit-product/{{product._id}}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="mb-3">
+            <label for="name" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              value="{{product.name}}"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              name="category"
+              value="{{product.category}}"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price (₹)</label>
+            <input
+              type="number"
+              step="0.01"
+              class="form-control"
+              id="price"
+              name="price"
+              value="{{product.price}}"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="4"
+              aria-valuemin=""
+              required
+            >{{product.description}}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label"></label>
+            <img
+              src="/product-images/{{product._id}}.jpg"
+              style="width: 100px; height:auto;"
+              alt="loading..."
+              id="imgView"
+            />
+            <input
+              class="form-control" 
+
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onchange="viewImage(event)"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Edit product</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  function viewImage(event){
+    document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
+</script>

@@ -1,0 +1,47 @@
+<style>
+  body {
+    background-color: #f0fff4;
+  }
+  .card {
+    border-left: 5px solid #28a745;
+  }
+  .status-badge {
+    font-size: 0.85rem;
+  }
+</style>
+
+<section>
+  <div class="container mt-5">
+    <h2 class="mb-4 text-success fw-bold">Order History</h2>
+
+    {{#each orders}}
+    <div class="card shadow-sm mb-4 p-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1">Order ID: <span class="text-muted">#{{this.orderId}}</span></h5>
+          <p class="mb-0">Date: <strong>{{this.date}}</strong></p>
+          <p class="mb-0">Total: ₹<strong>{{this.totalAmount}}</strong></p>
+        </div>
+        <div>
+          <span class="badge bg-success status-badge">{{this.status}}</span>
+        </div>
+      </div>
+
+      <hr>
+
+      {{#each this.products}}
+      <div class="row mb-2">
+        <div class="col-md-2">
+          <img src="/product-images/{{this.image}}.jpg" style="width: 3rem; height:4rem;" class="img-fluid rounded" alt="{{this.name}}">
+        </div>
+        <div class="col-md-10">
+          <h6 class="fw-bold">{{this.name}}</h6>
+          <p class="text-muted mb-1">Qty: {{this.quantity}}</p>
+          <p class="text-muted">Price: ₹{{this.price}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    {{/each}}
+  </div>
+</section>

@@ -1,0 +1,54 @@
+
+<style>
+   body {
+    background-color: #f0fff4;
+  }
+</style>
+
+<section>
+  <div class="container">
+    <div>
+      <form action="/login" method="post">
+        <div class="mb-3">
+          {{#if loginErr}}
+            <p class="error text-danger">{{loginErr}}</p>
+
+          {{/if}}
+          <label for="email" class="form-label text-success">Email Address</label>
+          <input
+            type="email"
+            class="form-control border-success"
+            id="email"
+            placeholder="Enter your email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label text-success">Password</label>
+          <input
+            type="password"
+            class="form-control border-success"
+            id="password"
+            placeholder="Enter password"
+            name="password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mb-2">Login</button>
+
+        <div class="text-center">
+          <small class="text-muted">Don't have an account?</small><br />
+          <a
+            href="/signup"
+            class="text-success fw-bold"
+            style="text-decoration: none;"
+          >Create New Account</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>

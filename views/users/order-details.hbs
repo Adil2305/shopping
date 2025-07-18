@@ -1,0 +1,130 @@
+
+<style>
+   body {
+    background-color: #f0fff4;
+  }
+</style>
+
+<section>
+  <div class="container mt-5">
+    <div class="card border-success shadow-lg p-4 rounded-4">
+      <h3 class="text-success fw-bold mb-4">Total: ₹{{total}}</h3>
+      <h3 class="text-success fw-bold mb-4">Enter Your Address</h3>
+
+      <form action="/order-details" method="POST" id="checkout-form">
+      
+        <!-- Address Section -->
+        <div class="row mb-3">
+
+         <div class="mb-3">
+          <label for="address1" class="form-label text-success">Address Line</label>
+<input type="hidden" id="userId" name="userId" value="{{user._id}}">
+        </div>
+
+          <div class="col-md-6">
+            <label for="fullName" class="form-label text-success">Full Name</label>
+            <input type="text" class="form-control border-success" id="fullName" name="fullName" required>
+          </div>
+          <div class="col-md-6">
+            <label for="phone" class="form-label text-success">Phone Number</label>
+            <input type="tel" class="form-control border-success" id="phone" name="phone" pattern="[0-9]{10}" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address1" class="form-label text-success">Address Line</label>
+          <input type="text" class="form-control border-success" id="address1" name="address" required>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="city" class="form-label text-success">City</label>
+            <input type="text" class="form-control border-success" id="city" name="city" required>
+          </div>
+          <div class="col-md-4">
+            <label for="state" class="form-label text-success">State</label>
+            <input type="text" class="form-control border-success" id="state" name="state" required>
+          </div>
+          <div class="col-md-4">
+            <label for="zip" class="form-label text-success">Zip Code</label>
+            <input type="text" class="form-control border-success" id="zip" name="zip" pattern="\d{6}" required>
+          </div>
+        </div>
+
+        <!-- Payment Option -->
+        <h4 class="text-success fw-bold mt-4 mb-3">Select Payment Method</h4>
+        <div class="form-check mb-2">
+          <input class="form-check-input green-radio" type="radio" name="paymentMethod" id="cod" value="COD" checked>
+          <label class="form-check-label text-success" for="cod">
+            Cash on Delivery (COD)
+          </label>
+        </div>
+       <div class="form-check mb-4">
+  <input class="form-check-input green-radio" type="radio" name="paymentMethod" id="online" value="ONLINE">
+  <label class="form-check-label text-success" for="online">
+    Online Payment
+  </label>
+</div>
+
+<!-- Online payment unavailable message -->
+<div id="online-warning" class="text-danger mb-3" style="display: none;">
+  ⚠️ Online payment is not available currently.
+</div>
+
+
+        <button type="submit" class="btn btn-success w-100">Place Order</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  $("checkout-form").submit(())
+</script>
+
+
+<!-- Add this inside your layout or in a <style> tag -->
+<style>
+  .green-radio:checked {
+    background-color: #198754;       /* Bootstrap green */
+    border-color: #198754;
+  }
+
+  .green-radio:focus {
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+  }
+</style>
+
+<script>
+  // Show/hide warning based on payment method
+  $('input[name="paymentMethod"]').on('change', function () {
+    if ($(this).val() === 'ONLINE') {
+      $('#online-warning').show();
+    } else {
+      $('#online-warning').hide();
+    }
+  });
+
+  // Existing AJAX submission
+  $('#checkout-form').submit(function (e) {
+    e.preventDefault();
+
+    const $btn = $(this).find('button[type="submit"]');
+    $btn.prop('disabled', true).text('Placing Order...');
+
+    $.ajax({
+      url: '/order-details',
+      method: 'POST',
+      data: $(this).serialize(),
+      success: function (response) {
+        alert("Order placed successfully!");
+        window.location.href = '/order-success';
+      },
+      error: function (err) {
+        console.error("Order error:", err);
+        alert("Something went wrong while placing the order.");
+        $btn.prop('disabled', false).text('Place Order');
+      }
+    });
+  });
+</script>
