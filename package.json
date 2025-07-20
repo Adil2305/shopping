@@ -13,7 +13,7 @@
     "express-fileupload": "^1.5.1",
     "express-handlebars": "^8.0.3",
     "express-session": "^1.18.1",
-    "fileupload": "^0.2.1",
+    "firebase": "^12.0.0",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongodb": "^3.6.2",
